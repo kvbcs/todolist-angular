@@ -1,5 +1,9 @@
 export type TodoProps = {
-    name: string,
-    isCompleted: boolean,
-    date: Date
-}
+  id: number;
+  title: string;
+  name: string;
+  author: string;
+  isCompleted: boolean;
+  tags?: string[];
+  date: Date;
+};

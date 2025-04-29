@@ -8,12 +8,15 @@ import { TodoProps } from './types';
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css',
 })
-	
 export class TodoComponent {
-	
+  nextID: number = 1;
   newTask: TodoProps = {
+    id: this.nextID++,
+    title: '',
+    author: '',
     name: '',
     isCompleted: false,
+    tags: [''],
     date: new Date(),
   };
 
@@ -21,21 +24,30 @@ export class TodoComponent {
 
   addTask() {
     if (
-      this.newTask.name &&
-      this.newTask.name !== null &&
-      this.newTask.name !== undefined &&
-      this.newTask.name !== '' &&
-      this.newTask.name.trim()
+      this.newTask.name.trim() &&
+      this.newTask.title.trim() &&
+      this.newTask.author.trim()
     ) {
+    //   this.newTask.tags?.join(' , ');
       this.tasks.push(this.newTask);
       console.log(this.newTask, this.tasks);
+      this.newTask = {
+        id: this.nextID,
+        title: '',
+        author: '',
+        name: '',
+        isCompleted: false,
+        tags: [''],
+        date: new Date(),
+      };
     } else {
-		alert('Please enter a task !');
+      alert('Please enter a task, title and author !');
     }
   }
-  deleteTask(index: number) {
-    this.tasks.splice(index, 1);
-    console.log(index);
+
+  deleteTask(id: number) {
+    this.tasks.splice(id, 1);
+    console.log(id);
   }
   completeTask() {
     this.newTask.isCompleted = !this.newTask.isCompleted;

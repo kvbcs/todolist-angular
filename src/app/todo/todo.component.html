@@ -1,12 +1,16 @@
 <h1>Todo List</h1>
 
-<input [(ngModel)]="newTask.name" type="text" />
+<input [(ngModel)]="newTask.name" type="text" placeholder="Enter a task..." required/>
+<input [(ngModel)]="newTask.title" type="text" placeholder="Enter a title..." required/>
+<input [(ngModel)]="newTask.author" type="text" placeholder="Enter an author..." required/>
+<input [(ngModel)]="newTask.tags" type="text" placeholder="Enter tags..." required/>
+
 <button (click)="addTask()">Add Task</button>
 <ul>
-  @for (task of tasks; track $index){
+  @for (task of tasks; track task.id){
   <li>
-    <input type="checkbox" [(checked)]="newTask.isCompleted" (click)="completeTask()">
-    {{ newTask.name }} {{newTask.date.toLocaleString()}}
+    <input type="checkbox" [(checked)]="task.isCompleted" (click)="completeTask()">
+    <h1>Title : {{task.title}}</h1> <h2>Author : {{task.author}}</h2> <p>Name : {{ task.name }}</p> Created at : {{task.date.toLocaleString()}} Tags : [{{task.tags}}]
     <button (click)="deleteTask($index)">Delete Task</button>
   </li>
   }
